@@ -307,6 +307,52 @@ interface ProductCollectionProps extends ItemGalleryProps {
   collectionHandle?: string
 }
 
+function useProductPlaceholder(product: ProductData | undefined) {
+  const [data, setData] = useState<ProductData | undefined>()
+
+  useEffect(() => {
+    ;(async () => {
+      if (product) {
+        return
+      }
+
+      const response = await fetch(
+        'https://graphql.myshopify.com/api/2021-04/graphql.json',
+        {
+          headers: {
+            accept: '*/*',
+            'accept-language': 'en-US,en;q=0.9',
+            'content-type': 'application/json',
+            'sec-ch-ua':
+              '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'cross-site',
+            'x-shopify-storefront-access-token':
+              'ecdc7f91ed0970e733268535c828fbbe',
+          },
+          referrer: 'https://shopify.dev/',
+          referrerPolicy: 'strict-origin-when-cross-origin',
+          body: JSON.stringify({
+            query: allProductsQuery,
+            variables: { first: 1 },
+          }),
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'omit',
+        }
+      )
+      const data = await response.json()
+      const productEdges: undefined | { node: ProductData }[] =
+        data?.data.products.edges
+      setData(productEdges?.map((edge) => edge.node)[0])
+    })()
+  }, [product])
+
+  return data
+}
+
 function useProductCollectionData(
   collectionHandle: string | undefined,
   offset?: number,
@@ -398,6 +444,26 @@ export function ProductGrid({
 
 function useProduct() {
   return useContext(ProductBoxContext)
+}
+
+export function StudioProductPlaceholder({
+  children,
+}: {
+  children: ReactNode
+}) {
+  const product = useProduct()
+  const placeholder = useProductPlaceholder(product)
+  if (product) {
+    return <>{children}</>
+  }
+  if (!placeholder) {
+    return null
+  }
+  return (
+    <ProductBoxContext.Provider value={placeholder}>
+      {children}
+    </ProductBoxContext.Provider>
+  )
 }
 
 export function ProductLink({
