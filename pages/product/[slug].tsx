@@ -6,7 +6,16 @@ import type {
 import { useRouter } from 'next/router'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
-import { ProductView } from '@components/product'
+import { PLASMIC } from 'plasmic-init'
+import NextError from 'next/error'
+import {
+  ProductCollectionContext,
+  ProductContext,
+} from '@components/ui/ItemGallery'
+import {
+  PlasmicComponent,
+  PlasmicRootProvider,
+} from '@plasmicapp/loader-nextjs'
 
 export async function getStaticProps({
   params,
@@ -37,8 +46,11 @@ export async function getStaticProps({
     throw new Error(`Product with slug '${params!.slug}' not found`)
   }
 
+  const plasmicData = await PLASMIC.maybeFetchComponentData('/product/[slug]')
+
   return {
     props: {
+      plasmicData,
       pages,
       product,
       relatedProducts,
@@ -65,16 +77,25 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
   }
 }
 
-export default function Slug({
-  product,
-  relatedProducts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Slug(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const router = useRouter()
 
+  const { plasmicData, product, relatedProducts } = props
+  if (!plasmicData || plasmicData.entryCompMetas.length === 0) {
+    return <NextError statusCode={404} />
+  }
   return router.isFallback ? (
     <h1>Loading...</h1>
   ) : (
-    <ProductView product={product} relatedProducts={relatedProducts} />
+    <ProductCollectionContext.Provider value={relatedProducts}>
+      <ProductContext.Provider value={product}>
+        <PlasmicRootProvider loader={PLASMIC} prefetchedData={plasmicData}>
+          <PlasmicComponent component={plasmicData.entryCompMetas[0].name} />
+        </PlasmicRootProvider>
+      </ProductContext.Provider>
+    </ProductCollectionContext.Provider>
   )
 }
 

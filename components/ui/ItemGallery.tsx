@@ -85,17 +85,32 @@ export function Slider({
 
 const Grid = Slider
 
-interface ProductGalleryProps {
-  offset?: number
-  count?: number
-  scroller?: boolean
-  className?: string
-}
+export const ProductContext = createContext<Product | undefined>(undefined)
+export const ProductCollectionContext = createContext<Product[] | undefined>(
+  undefined
+)
 
-const ProductBoxContext = createContext<Product | undefined>(undefined)
 interface ProductCollectionProps extends ItemGalleryProps {
   offset?: number
   count?: number
+}
+
+function useProductCollectionPlaceholder(products: Product[] | undefined) {
+  const [data, setData] = useState<Product[] | undefined>()
+
+  useEffect(() => {
+    ;(async () => {
+      if (products) {
+        return
+      }
+
+      const response = await fetch(`/api/catalog/products`)
+      const { products: data } = await response.json()
+      setData(data)
+    })()
+  }, [products])
+
+  return data
 }
 
 function useProductPlaceholder(product: Product | undefined) {
@@ -116,38 +131,35 @@ function useProductPlaceholder(product: Product | undefined) {
   return data
 }
 
-function useProductCollectionData(offset?: number, count?: number) {
-  const [data, setData] = useState<Product[] | undefined>(undefined)
-  useEffect(() => {
-    ;(async () => {
-      const response = await fetch(`/api/catalog/products`)
-      const { products } = await response.json()
-      setData(products.slice(offset, count ? (offset || 0) + count : undefined))
-    })()
-  }, [offset, count])
-  return data
-}
-
 export function ProductGrid({
   count,
   offset,
   children,
   ...rest
 }: ProductCollectionProps) {
-  const products = useProductCollectionData(offset, count)
+  const products = useProductCollection()?.slice(
+    offset,
+    count ? (offset || 0) + count : undefined
+  )
   return (
     <Grid {...rest}>
       {products?.map((product, i) => (
-        <ProductBoxContext.Provider value={product} key={product.id}>
+        <ProductContext.Provider value={product} key={product.id}>
           <div>{repeatedElement(i === 0, children)}</div>
-        </ProductBoxContext.Provider>
+        </ProductContext.Provider>
       ))}
     </Grid>
   )
 }
 
 function useProduct() {
-  return useContext(ProductBoxContext)
+  return useContext(ProductContext)
+}
+
+function useProductCollection() {
+  const products = useContext(ProductCollectionContext)
+  const placeholder = useProductCollectionPlaceholder(products)
+  return products || placeholder
 }
 
 export function StudioProductPlaceholder({
@@ -164,9 +176,9 @@ export function StudioProductPlaceholder({
     return null
   }
   return (
-    <ProductBoxContext.Provider value={placeholder}>
+    <ProductContext.Provider value={placeholder}>
       {children}
-    </ProductBoxContext.Provider>
+    </ProductContext.Provider>
   )
 }
 
