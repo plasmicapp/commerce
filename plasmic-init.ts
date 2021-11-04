@@ -1,10 +1,11 @@
 import { initPlasmicLoader } from '@plasmicapp/loader-nextjs'
 import {
+  ProductDescription,
   ProductGrid,
   ProductImage,
-  ProductPrice,
-  ProductName,
   ProductLink,
+  ProductName,
+  ProductPrice,
   StudioProductPlaceholder,
 } from '@components/ui/ItemGallery'
 import { Reveal } from '@components/ui/Reveal'
@@ -65,6 +66,11 @@ PLASMIC.registerComponent(ProductLink, {
 
 PLASMIC.registerComponent(ProductName, {
   name: 'ProductName',
+  props: {},
+})
+
+PLASMIC.registerComponent(ProductDescription, {
+  name: 'ProductDescription',
   props: {},
 })
 

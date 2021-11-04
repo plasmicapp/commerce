@@ -192,6 +192,19 @@ export function ProductName({ className }: { className?: string }) {
   return <div className={className}>{product.name}</div>
 }
 
+export function ProductDescription({ className }: { className?: string }) {
+  const product = useProduct()
+  if (!product) return null
+  return (
+    <div
+      className={className}
+      {...((product.descriptionHtml && {
+        dangerouslySetInnerHTML: { __html: product.descriptionHtml },
+      }) || { children: product.description })}
+    />
+  )
+}
+
 export function ProductPrice({ className }: { className?: string }) {
   const product = useProduct()
   if (!product) return null
