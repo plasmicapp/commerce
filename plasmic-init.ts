@@ -6,6 +6,7 @@ import {
   ProductPrice,
   ProductTitle,
   ProductLink,
+  StudioProductPlaceholder,
 } from '@components/ui/ItemGallery'
 import { Reveal } from '@components/ui/Reveal'
 import { Expander } from '@components/ui/Expander'
@@ -50,7 +51,6 @@ PLASMIC.registerComponent(ProductSlider, {
 
 PLASMIC.registerComponent(ProductGrid, {
   name: 'ProductGrid',
-  displayName: 'Product Grid',
   defaultStyles: {
     maxWidth: '100%',
     width: 'stretch',
@@ -78,7 +78,13 @@ PLASMIC.registerComponent(ProductGrid, {
       defaultValue: 16,
     },
   },
-  importPath: './ProductComponents',
+})
+
+PLASMIC.registerComponent(StudioProductPlaceholder, {
+  name: 'StudioProductPlaceholder',
+  props: {
+    children: 'slot',
+  },
 })
 
 PLASMIC.registerComponent(ProductLink, {
