@@ -1,10 +1,9 @@
 import { initPlasmicLoader } from '@plasmicapp/loader-nextjs'
 import {
   ProductGrid,
-  ProductSlider,
   ProductImage,
   ProductPrice,
-  ProductTitle,
+  ProductName,
   ProductLink,
   StudioProductPlaceholder,
 } from '@components/ui/ItemGallery'
@@ -24,31 +23,6 @@ export const PLASMIC = initPlasmicLoader({
   preview: true,
 })
 
-const collectionHandles = [
-  'latest-stuff',
-  'boots',
-  'winter-things',
-  'outerwear',
-  'casual-things',
-  'summer-collection',
-  'services',
-  'gifts',
-]
-
-PLASMIC.registerComponent(ProductSlider, {
-  name: 'ProductSlider',
-  props: {
-    offset: 'number',
-    count: 'number',
-    scroller: 'boolean',
-    collectionHandle: {
-      type: 'choice',
-      options: collectionHandles,
-      defaultValue: 'latest-stuff',
-    },
-  },
-})
-
 PLASMIC.registerComponent(ProductGrid, {
   name: 'ProductGrid',
   defaultStyles: {
@@ -56,11 +30,6 @@ PLASMIC.registerComponent(ProductGrid, {
     width: 'stretch',
   },
   props: {
-    collectionHandle: {
-      type: 'choice',
-      options: collectionHandles,
-      defaultValue: 'latest-stuff',
-    },
     scroller: 'boolean',
     offset: 'number',
     count: 'number',
@@ -94,8 +63,8 @@ PLASMIC.registerComponent(ProductLink, {
   },
 })
 
-PLASMIC.registerComponent(ProductTitle, {
-  name: 'ProductTitle',
+PLASMIC.registerComponent(ProductName, {
+  name: 'ProductName',
   props: {},
 })
 
