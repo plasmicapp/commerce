@@ -16,6 +16,7 @@ import {
   exampleProductData,
 } from './ItemGalleryExampleData'
 import { repeatedElement } from '@plasmicapp/loader-nextjs'
+import Link from 'next/link'
 
 function formatTitle<T>(x: T) {
   return x
@@ -397,6 +398,23 @@ export function ProductGrid({
 
 function useProduct() {
   return useContext(ProductBoxContext)
+}
+
+export function ProductLink({
+  className,
+  children,
+}: {
+  className?: string
+  children: ReactNode
+}) {
+  const product = useProduct()
+  if (!product) return null
+  const href = product.onlineStoreUrl
+  return (
+    <Link href={href}>
+      <a className={className}>{children}</a>
+    </Link>
+  )
 }
 
 export function ProductTitle({ className }: { className?: string }) {
