@@ -215,6 +215,7 @@ export function Slider({
 const Grid = Slider
 
 interface ProductGalleryProps {
+  offset?: number
   count?: number
   collectionHandle?: string
   scroller?: boolean
@@ -264,11 +265,12 @@ function useProductData() {
 
 export function ProductSlider({
   collectionHandle,
+  offset,
   count,
   scroller = true,
   ...rest
 }: ProductGalleryProps) {
-  const products = useProductCollectionData(collectionHandle, count)
+  const products = useProductCollectionData(collectionHandle, offset, count)
   return (
     <Slider scroller={scroller} {...rest}>
       {products?.map((product) => {
@@ -299,12 +301,14 @@ export type ProductData =
 
 const ProductBoxContext = createContext<ProductData | undefined>(undefined)
 interface ProductCollectionProps extends ItemGalleryProps {
+  offset?: number
   count?: number
   collectionHandle?: string
 }
 
 function useProductCollectionData(
   collectionHandle: string | undefined,
+  offset?: number,
   count?: number
 ) {
   const [data, setData] = useState<ProductData[] | undefined>(undefined)
@@ -365,20 +369,21 @@ function useProductCollectionData(
               ? product.productType === 'Boots'
               : true
           )
-          .slice(0, count)
+          .slice(offset, count ? (offset || 0) + count : undefined)
       )
     })()
-  }, [collectionHandle, count])
+  }, [collectionHandle, offset, count])
   return data
 }
 
 export function ProductGrid({
   collectionHandle,
   count,
+  offset,
   children,
   ...rest
 }: ProductCollectionProps) {
-  const products = useProductCollectionData(collectionHandle, count)
+  const products = useProductCollectionData(collectionHandle, offset, count)
   return (
     <Grid {...rest}>
       {products?.map((product, i) => (

@@ -12,9 +12,9 @@ import { Expander } from '@components/ui/Expander'
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
-      id: 'mBmeCvMxUra6mdM5V7nbPr', // ID of a project you are using
+      id: 'd1YxdDF84AwJPcved6P9XK', // ID of a project you are using
       token:
-        'LLucBnE5ztxFS9hFow49LmUc35Fz8qpfdWSPMzBrLiwGRqtIrNz3EIqzJYExarMBQtLEeUNK6vyixd6s6kA', // API token for that project
+        '2HcGZxyEBMDLCvoYiBUiJA491wSUCtspufWxj2gkXOz2T5l6iI3LBwLrXfKcULMbbq9nYJ1y0a9NH4Nskvw', // API token for that project
     },
   ],
   // Fetches the latest revisions, whether or not they were unpublished!
@@ -36,6 +36,7 @@ const collectionHandles = [
 PLASMIC.registerComponent(ProductSlider, {
   name: 'ProductSlider',
   props: {
+    offset: 'number',
     count: 'number',
     scroller: 'boolean',
     collectionHandle: {
@@ -60,6 +61,7 @@ PLASMIC.registerComponent(ProductGrid, {
       defaultValue: 'latest-stuff',
     },
     scroller: 'boolean',
+    offset: 'number',
     count: 'number',
     children: 'slot',
     columns: {
