@@ -5,6 +5,7 @@ import {
   ProductImage,
   ProductPrice,
   ProductTitle,
+  ProductLink,
 } from '@components/ui/ItemGallery'
 import { Reveal } from '@components/ui/Reveal'
 import { Expander } from '@components/ui/Expander'
@@ -78,6 +79,13 @@ PLASMIC.registerComponent(ProductGrid, {
     },
   },
   importPath: './ProductComponents',
+})
+
+PLASMIC.registerComponent(ProductLink, {
+  name: 'ProductLink',
+  props: {
+    children: 'slot',
+  },
 })
 
 PLASMIC.registerComponent(ProductTitle, {
