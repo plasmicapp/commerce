@@ -16,6 +16,7 @@ import {
   PlasmicComponent,
   PlasmicRootProvider,
 } from '@plasmicapp/loader-nextjs'
+import { NextSeo } from 'next-seo'
 
 export async function getStaticProps({
   params,
@@ -93,6 +94,23 @@ export default function Slug(
       <ProductContext.Provider value={product}>
         <PlasmicRootProvider loader={PLASMIC} prefetchedData={plasmicData}>
           <PlasmicComponent component={plasmicData.entryCompMetas[0].name} />
+          <NextSeo
+            title={product.name}
+            description={product.description}
+            openGraph={{
+              type: 'website',
+              title: product.name,
+              description: product.description,
+              images: [
+                {
+                  url: product.images[0]?.url!,
+                  width: 800,
+                  height: 600,
+                  alt: product.name,
+                },
+              ],
+            }}
+          />
         </PlasmicRootProvider>
       </ProductContext.Provider>
     </ProductCollectionContext.Provider>
