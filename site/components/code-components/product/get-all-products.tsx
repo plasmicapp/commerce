@@ -1,10 +1,7 @@
 import { Product } from "@commerce/types/product";
-import { useCommerce } from "@framework";
 import React from "react";
 import { ProductCollectionContext } from "../contexts";
 import useSWR from "swr";
-import SWRFetcher from "@vercel/commerce/utils/default-fetcher";
-import { useFetcher } from "@vercel/commerce/utils/use-hook";
 
 interface GetAllProductsProps {
   children: React.ReactNode;
