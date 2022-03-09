@@ -2,10 +2,10 @@
   "products": [
     {
       "id": "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzU0NDczMjUwMjQ0MjA=",
-      "name": "Short Sleeve T-Shirt",
+      "name": "New Short Sleeve T-Shirt",
       "vendor": "Next.js",
-      "path": "/short-sleeve-t-shirt",
-      "slug": "short-sleeve-t-shirt",
+      "path": "/new-short-sleeve-t-shirt",
+      "slug": "new-short-sleeve-t-shirt",
       "price": { "value": 25, "currencyCode": "USD" },
       "descriptionHtml": "<p><span>Show off your love for Next.js and Vercel with this unique,&nbsp;</span><strong>limited edition</strong><span>&nbsp;t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made!&nbsp;</span><strong>All proceeds will be donated to charity.</strong></p>",
       "images": [
@@ -80,7 +80,7 @@
       "path": "/lightweight-jacket",
       "slug": "lightweight-jacket",
       "price": { "value": 249.99, "currencyCode": "USD" },
-      "descriptionHtml": "<bold>Lightweight Jacket</bold><p><span>Show off your love for Next.js and Vercel with this unique,&nbsp;</span><strong>limited edition</strong><span>&nbsp;t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made!&nbsp;</span><strong>All proceeds will be donated to charity.</strong></p>",
+      "descriptionHtml": "<p><span>Show off your love for Next.js and Vercel with this unique,&nbsp;</span><strong>limited edition</strong><span>&nbsp;t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made!&nbsp;</span><strong>All proceeds will be donated to charity.</strong></p>",
       "images": [
         {
           "url": "/assets/lightweight-jacket-0.png",
@@ -111,17 +111,7 @@
               "displayName": "Size",
               "values": [
                 {
-                  "label": "L"
-                }
-              ]
-            },
-            {
-              "__typename": "MultipleChoiceOption",
-              "id": "asd2",
-              "displayName": "Color",
-              "values": [
-                {
-                  "label": "black"
+                  "label": "XL"
                 }
               ]
             }
@@ -134,12 +124,8 @@
           "displayName": "Color",
           "values": [
             {
-              "label": "black",
-              "hexColors": ["#000"]
-            },
-            {
-              "label": "white",
-              "hexColors": ["#FFF"]
+              "label": "color",
+              "hexColors": ["#222"]
             }
           ]
         },
@@ -155,9 +141,6 @@
             },
             {
               "label": "L"
-            },
-            {
-              "label": "XL"
             }
           ]
         }
@@ -169,8 +152,8 @@
       "vendor": "Next.js",
       "path": "/shirt",
       "slug": "shirt",
-      "price": { "value": 30, "currencyCode": "USD" },
-      "descriptionHtml": "<bold>Shirt</bold><p><span>Show off your love for Next.js and Vercel with this unique,&nbsp;</span><strong>limited edition</strong><span>&nbsp;t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made!&nbsp;</span><strong>All proceeds will be donated to charity.</strong></p>",
+      "price": { "value": 25, "currencyCode": "USD" },
+      "descriptionHtml": "<p><span>Show off your love for Next.js and Vercel with this unique,&nbsp;</span><strong>limited edition</strong><span>&nbsp;t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made!&nbsp;</span><strong>All proceeds will be donated to charity.</strong></p>",
       "images": [
         {
           "url": "/assets/t-shirt-0.png",
@@ -213,17 +196,7 @@
               "displayName": "Size",
               "values": [
                 {
-                  "label": "S"
-                }
-              ]
-            },
-            {
-              "__typename": "MultipleChoiceOption",
-              "id": "asd2",
-              "displayName": "Color",
-              "values": [
-                {
-                  "label": "black"
+                  "label": "XL"
                 }
               ]
             }
@@ -234,26 +207,11 @@
         {
           "id": "option-color",
           "displayName": "Color",
-          "values": [{
-            "label": "black",
-            "hexColors": ["#000"]
-          },
-          {
-            "label": "white",
-            "hexColors": ["#FFF"]
-          },
-          {
-            "label": "red",
-            "hexColors": ["#F00"]
-          },
-          {
-            "label": "green",
-            "hexColors": ["#0F0"]
-          },
-          {
-            "label": "blue",
-            "hexColors": ["#00F"]
-          }
+          "values": [
+            {
+              "label": "color",
+              "hexColors": ["#222"]
+            }
           ]
         },
         {

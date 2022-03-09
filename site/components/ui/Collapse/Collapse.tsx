@@ -8,12 +8,10 @@ import useMeasure from 'react-use-measure'
 export interface CollapseProps {
   title: string
   children: ReactNode
-  className?: string
-  initialIsActive?: boolean
 }
 
-const Collapse: FC<CollapseProps> = ({ title, children, className, initialIsActive }) => {
-  const [isActive, setActive] = useState(initialIsActive ?? false)
+const Collapse: FC<CollapseProps> = ({ title, children }) => {
+  const [isActive, setActive] = useState(false)
   const [ref, { height: viewHeight }] = useMeasure()
 
   const animProps = useSpring({
@@ -26,7 +24,7 @@ const Collapse: FC<CollapseProps> = ({ title, children, className, initialIsActi
 
   return (
     <div
-      className={className ?? s.root}
+      className={s.root}
       role="button"
       tabIndex={0}
       aria-expanded={isActive}
