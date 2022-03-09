@@ -119,5 +119,6 @@ export function getCommerceProvider<P extends Provider>(provider: P) {
 }
 
 export function useCommerce<P extends Provider>() {
+  const x = useContext(Commerce);
   return useContext(Commerce) as CommerceContextValue<P>
 }
